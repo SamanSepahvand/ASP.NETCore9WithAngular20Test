@@ -87,3 +87,4 @@ C:\Users\s.sepahvand\source\repos\CoreAngular1\bin\Debug\net9.0\Microsoft.Extens
 C:\Users\s.sepahvand\source\repos\CoreAngular1\bin\Debug\net9.0\ClientApp\src\proxy.conf.json
 C:\Users\s.sepahvand\source\repos\CoreAngular1\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
 C:\Users\s.sepahvand\source\repos\CoreAngular1\obj\Debug\net9.0\CoreAngular1.sourcelink.json
+C:\Users\s.sepahvand\source\repos\CoreAngular1\bin\Debug\net9.0\ClientApp\dist\ClientApp\prerendered-routes.json

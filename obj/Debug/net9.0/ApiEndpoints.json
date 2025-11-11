@@ -19,7 +19,7 @@
     "Parameters": [
       {
         "Name": "login",
-        "Type": "CoreAngular1.Models.User",
+        "Type": "CoreAngular1.MetaModel.Users.UserLoginInput",
         "IsRequired": true
       }
     ],
@@ -45,7 +45,7 @@
     "Parameters": [
       {
         "Name": "user",
-        "Type": "CoreAngular1.Models.User",
+        "Type": "CoreAngular1.Models.Users",
         "IsRequired": true
       }
     ],

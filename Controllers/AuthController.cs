@@ -1,5 +1,7 @@
 ﻿using CoreAngular1.Data;
+using CoreAngular1.MetaModel.Users;
 using CoreAngular1.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -23,9 +25,9 @@ namespace CoreAngular1.Controllers
         }
 
         [HttpPost("register")]
-        public IActionResult Register(User user)
+        public IActionResult Register(Users user)
         {
-            if (_context.Users.Any(u => u.Username == user.Username))
+            if (_context.Users.Any(u => u.UserName == user.UserName))
                 return BadRequest(new { message = "User Exist !!" });
 
             _context.Users.Add(user);
@@ -42,30 +44,70 @@ namespace CoreAngular1.Controllers
         }
 
         [HttpPost("login")]
-        public IActionResult Login(User login)
+        public IActionResult Login(UserLoginInput login)
         {
 
         
-            var user = _context.Users.FirstOrDefault(u => u.Username == login.Username && u.Password == login.Password);
+            var user = _context.Users.FirstOrDefault(u => u.UserName == login.UserName && u.Password == login.Password);
             if (user == null)
               return BadRequest(new { message = "Unauthorized !" });
 
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes(_config["Jwt:Key"]!);
-            var tokenDescriptor = new SecurityTokenDescriptor
+            var users = (from u in _context.Users
+                        join ud in _context.UserDependencies on u.Id equals ud.UserId
+                        join w in _context.Warehouses on ud.WarehouseId equals w.Id
+                        where u.UserName == login.UserName && u.Password == login.Password
+                        select new
+                        {
+                            u.Id,
+                            u.UserName,
+                            u.FirstName,
+                            u.LastName,
+                            ud.WarehouseId,
+                            WarehouseName = w.Name
+                        }).FirstOrDefault();
+
+    
+
+            var key = Encoding.ASCII.GetBytes(_config["Jwt:Key"]);
+
+            var claims = new List<Claim>
             {
-                Subject = new ClaimsIdentity(new[]
-                {
-                new Claim(ClaimTypes.Name, user.Username)
-            }),
-               // Expires = DateTime.UtcNow.AddHours(2),
-                Expires = DateTime.UtcNow.AddMinutes(1), // <-- اعتبار 1 دقیقه
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                     new Claim(ClaimTypes.Name, users.UserName),
+                    new Claim("UserId", users.Id.ToString()),
+                    new Claim("FirstName", users.FirstName ?? ""),
+                    new Claim("LastName", users.LastName ?? ""),
+                    new Claim("WarehouseId", users.Id.ToString()), // اگه خواستی WarehouseId واقعی بذار
+                    new Claim("WarehouseName", users.WarehouseName ?? "")
             };
 
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(claims),
+                Expires = DateTime.UtcNow.AddMinutes(10),
+                SigningCredentials = new SigningCredentials(
+                    new SymmetricSecurityKey(key),
+                    SecurityAlgorithms.HmacSha256Signature)
+            };
+
+            var tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.CreateToken(tokenDescriptor);
-            return Ok(new { token = tokenHandler.WriteToken(token) });
+            var tokenString = tokenHandler.WriteToken(token);
+
+
+            return Ok(new
+            {
+                Token = tokenString,
+                ExpireAt = tokenDescriptor.Expires,
+                users.UserName,
+                users.FirstName,
+                users.LastName,
+                users.WarehouseName
+            });
         }
+
+
+     
+
 
         [HttpGet("check")]
         [Microsoft.AspNetCore.Authorization.Authorize]
