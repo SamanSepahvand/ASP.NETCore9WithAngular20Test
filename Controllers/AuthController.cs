@@ -37,6 +37,7 @@ namespace CoreAngular1.Controllers
         [HttpGet("ping")]
         public IActionResult Ping()
         {
+            //
             return Ok(new { message = "API is alive!" });
         }
 

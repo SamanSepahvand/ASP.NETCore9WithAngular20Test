@@ -80,10 +80,10 @@ C:\Users\s.sepahvand\source\repos\CoreAngular1\bin\Debug\net9.0\ClientApp\packag
 C:\Users\s.sepahvand\source\repos\CoreAngular1\bin\Debug\net9.0\ClientApp\tsconfig.app.json
 C:\Users\s.sepahvand\source\repos\CoreAngular1\bin\Debug\net9.0\ClientApp\tsconfig.json
 C:\Users\s.sepahvand\source\repos\CoreAngular1\bin\Debug\net9.0\ClientApp\tsconfig.spec.json
-C:\Users\s.sepahvand\source\repos\CoreAngular1\bin\Debug\net9.0\ClientApp\dist\ClientApp\prerendered-routes.json
 C:\Users\s.sepahvand\source\repos\CoreAngular1\bin\Debug\net9.0\Microsoft.AspNetCore.SpaServices.Extensions.dll
 C:\Users\s.sepahvand\source\repos\CoreAngular1\bin\Debug\net9.0\Microsoft.Extensions.FileProviders.Abstractions.dll
 C:\Users\s.sepahvand\source\repos\CoreAngular1\bin\Debug\net9.0\Microsoft.Extensions.FileProviders.Physical.dll
 C:\Users\s.sepahvand\source\repos\CoreAngular1\bin\Debug\net9.0\Microsoft.Extensions.FileSystemGlobbing.dll
 C:\Users\s.sepahvand\source\repos\CoreAngular1\bin\Debug\net9.0\ClientApp\src\proxy.conf.json
 C:\Users\s.sepahvand\source\repos\CoreAngular1\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt
+C:\Users\s.sepahvand\source\repos\CoreAngular1\obj\Debug\net9.0\CoreAngular1.sourcelink.json

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CoreAngular1")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d9c9420b5465d74499347cd20915e57f9803c7f8")]
 [assembly: System.Reflection.AssemblyProductAttribute("CoreAngular1")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CoreAngular1")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
