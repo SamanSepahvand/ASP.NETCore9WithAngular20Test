@@ -1,0 +1,30 @@
+<div class="register-container">
+  <h2>ثبت‌نام</h2>
+
+  <form>
+    <div class="form-group">
+      <label for="username">نام کاربری</label>
+      <input
+        id="username"
+        type="text"
+        [(ngModel)]="username"
+        name="username"
+        placeholder="نام کاربری خود را وارد کنید"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="password">رمز عبور</label>
+      <input
+        id="password"
+        type="password"
+        [(ngModel)]="password"
+        name="password"
+        placeholder="رمز عبور خود را وارد کنید"
+      />
+    </div>
+
+    <button type="button" class="btn btn-primary" (click)="register()">ثبت‌نام</button>
+    <button type="button" class="btn btn-secondary" (click)="goToLogin()">ورود به حساب</button>
+  </form>
+</div>

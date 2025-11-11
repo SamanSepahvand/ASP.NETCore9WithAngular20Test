@@ -1,0 +1,48 @@
+<header class="app-header">
+  <div class="header-left">
+
+     <!-- دکمه منو برای موبایل -->
+    <button class="menu-btn hamburger" (click)="toggleDropdown()">
+      ☰ منو
+    </button>
+
+    <!-- منوی کشویی -->
+<ul class="dropdown-menu" [class.show]="dropdownOpen">
+  <li>
+    <a routerLink="/profile">
+      <i class="fas fa-user"></i> پروفایل
+    </a>
+  </li>
+  <li>
+    <a routerLink="/change-password">
+      <i class="fas fa-key"></i> تغییر رمز
+    </a>
+
+  </li>
+
+  
+  <li>
+    <a routerLink="/settings">
+      <i class="fas fa-cog"></i> تنظیمات
+    </a>
+  </li>
+  <li>
+    <a (click)="logout()">
+      <i class="fas fa-sign-out-alt"></i> خروج
+    </a>
+  </li>
+</ul>
+
+    داشبورد سیستم تیکتینگ
+
+
+  </div>
+
+  <div class="header-right" ngIf="user">
+    <div class="user-info">
+      {{ user.firstName }} {{ user.lastName }} | {{ user.warehouseName }}
+    </div>
+
+   
+  </div>
+</header>

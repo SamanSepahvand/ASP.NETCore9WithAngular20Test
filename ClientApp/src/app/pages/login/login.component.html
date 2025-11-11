@@ -1,0 +1,41 @@
+<div class="login-container">
+  <h2>ورود به حساب</h2>
+
+  <form>
+    <div class="form-group">
+      <label for="username">نام کاربری</label>
+      <input
+        id="username"
+        type="text"
+        [(ngModel)]="username"
+        name="username"
+        placeholder="نام کاربری خود را وارد کنید"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="password">رمز عبور</label>
+      <input
+        id="password"
+        type="password"
+        [(ngModel)]="password"
+        name="password"
+        placeholder="رمز عبور خود را وارد کنید"
+      />
+    </div>
+
+    <button type="button" class="btn btn-primary" (click)="login()">
+      ورود
+    </button>
+
+    <div class="test-section">
+      <button type="button" class="btn btn-test" (click)="testApi()">تست API</button>
+      <p>{{ apiMessage }}</p>
+    </div>
+
+    <div class="register-link">
+      <span>حساب کاربری ندارید؟</span>
+      <button type="button" (click)="register()">ثبت‌نام</button>
+    </div>
+  </form>
+</div>

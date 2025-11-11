@@ -1,0 +1,9 @@
+.app-footer {
+  text-align: center;
+  padding: 10px 0;
+  background-color: #111;
+  color: #fff;
+  border-top: 2px solid #444;
+  font-weight: bold;
+  /* sticky لازم نیست، چون flex باعث میشه همیشه پایین باشه */
+}

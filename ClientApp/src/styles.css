@@ -1,0 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;700&display=swap');
+
+/* تنظیمات کلی پروژه */
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: "Vazirmatn", sans-serif !important;
+  direction: rtl;
+  text-align: right;
+  background-color: #f8f9fa;
+  color: #212529;
+}
+
+/* اطمینان از راست‌چینی همه عناصر */
+*, input, button, textarea, select, label {
+  font-family: "Vazirmatn", sans-serif !important;
+  box-sizing: border-box;
+  direction: rtl;
+  text-align: right;
+}
+
+/* فیلدها و دکمه‌ها */
+input, button, textarea, select {
+  border-radius: 6px;
+  padding: 8px 12px;
+}
+
+/* فقط دکمه‌ها وسط‌چین بمونن */
+button {
+  text-align: center !important;  /* 👈 متن دکمه وسط */
+  display: inline-block;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 16px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* پاکسازی کامل فاصله‌ها و ارتفاع 100% */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* wrapper اصلی */
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* کل ارتفاع صفحه */
+  width: 100%;        /* تمام عرض */
+}
+
+/* محتوای اصلی */
+.app-content {
+  flex: 1;
+  width: 100%;
+}
+
+/* هدر */
+.app-header {
+  background-color: #111;
+  color: #fff;
+  padding: 10px 20px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+  width: 100%;
+  margin: 0; /* حذف فاصله اضافی */
+}
+
+/* فوتر */
+app-footer {
+  background-color: #111;
+  color: #fff;
+  padding: 15px 20px;
+  text-align: center;
+  border-top: 2px solid #444;
+  width: 100%;
+  margin: 0; /* حذف فاصله اضافی */
+}

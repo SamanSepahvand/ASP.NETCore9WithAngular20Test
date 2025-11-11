@@ -1,0 +1,13 @@
+/* کل layout را فول صفحه می‌کنیم */
+.layout-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* ارتفاع کل viewport */
+}
+
+/* محتوای اصلی تمام فضای باقی مانده را می‌گیرد */
+.main-content {
+  flex: 1;
+  padding: 20px;
+  background-color: #f5f5f5; /* اختیاری */
+}
