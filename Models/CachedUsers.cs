@@ -3,8 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CoreAngular1.Models
 {
-    [Table("Users")]
-    public class Users
+    [Table("CachedUsers")]
+    public class CachedUsers
     {
         [Key]
         public int Id { get; set; }

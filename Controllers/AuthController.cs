@@ -1,8 +1,10 @@
 ﻿using CoreAngular1.Data;
+using CoreAngular1.Infrastructure;
 using CoreAngular1.MetaModel.Users;
 using CoreAngular1.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -25,12 +27,12 @@ namespace CoreAngular1.Controllers
         }
 
         [HttpPost("register")]
-        public IActionResult Register(Users user)
+        public IActionResult Register(CachedUsers user)
         {
-            if (_context.Users.Any(u => u.UserName == user.UserName))
+            if (_context.CachedUsers.Any(u => u.UserName == user.UserName))
                 return BadRequest(new { message = "User Exist !!" });
 
-            _context.Users.Add(user);
+            _context.CachedUsers.Add(user);
             _context.SaveChanges();
             return Ok(new { message = "User registered" });
         }
@@ -39,7 +41,25 @@ namespace CoreAngular1.Controllers
         [HttpGet("ping")]
         public IActionResult Ping()
         {
+
+
+            // تست جدول CachedRoles
+            var roles = _context.CachedRoles.ToList();
+            var roledds = _context.Departments.ToList();
+  
+
+            Console.WriteLine($"تعداد Roles: {roles.Count}");
+            foreach (var r in roles)
+            {
+                Console.WriteLine($"{r.Id} - {r.Name}");
+            }
+
+            // تست جدول Tickets
+            var tickets = _context.Tickets.ToList();
+            Console.WriteLine($"تعداد Tickets: {tickets.Count}");
             //
+
+ 
             return Ok(new { message = "API is alive!" });
         }
 
@@ -47,26 +67,39 @@ namespace CoreAngular1.Controllers
         public IActionResult Login(UserLoginInput login)
         {
 
-        
-            var user = _context.Users.FirstOrDefault(u => u.UserName == login.UserName && u.Password == login.Password);
+
+            var user = _context.CachedUsers.FirstOrDefault(u => u.UserName == login.UserName);
             if (user == null)
-              return BadRequest(new { message = "Unauthorized !" });
+            {
+                var ss = user.Id + 58;
+                return BadRequest(new { message = "نام کاربری  یا رمز عبور معبر نمی باشد !" });
 
-            var users = (from u in _context.Users
-                        join ud in _context.UserDependencies on u.Id equals ud.UserId
-                        join w in _context.Warehouses on ud.WarehouseId equals w.Id
-                        where u.UserName == login.UserName && u.Password == login.Password
-                        select new
-                        {
-                            u.Id,
-                            u.UserName,
-                            u.FirstName,
-                            u.LastName,
-                            ud.WarehouseId,
-                            WarehouseName = w.Name
-                        }).FirstOrDefault();
+            }
+       
 
-    
+
+            var pass = StringCryptor.Encrypt(login.Password, user.UserName);
+
+            if (pass != user.Password)
+                return BadRequest(new { message = "نام کاربری یا رمز عبور اشتباه است" });
+
+
+
+            var users = (from u in _context.CachedUsers
+                         join ud in _context.CachedUserDependencies on u.Id equals ud.UserId
+                         join w in _context.CachedWarehouses on ud.WarehouseId equals w.Id
+                         where u.UserName == login.UserName && u.Password == pass
+                         select new
+                         {
+                             u.Id,
+                             u.UserName,
+                             u.FirstName,
+                             u.LastName,
+                             ud.WarehouseId,
+                             WarehouseName = w.Name
+                         }).FirstOrDefault();
+
+
 
             var key = Encoding.ASCII.GetBytes(_config["Jwt:Key"]);
 
@@ -106,11 +139,32 @@ namespace CoreAngular1.Controllers
         }
 
 
-     
+
 
 
         [HttpGet("check")]
         [Microsoft.AspNetCore.Authorization.Authorize]
-        public IActionResult Check() => Ok("Token is valid");
+        public IActionResult Check()
+        {
+
+     
+
+            // تست جدول CachedRoles
+            var roles = _context.CachedRoles.ToList();
+            Console.WriteLine($"تعداد Roles: {roles.Count}");
+            foreach (var r in roles)
+            {
+                Console.WriteLine($"{r.Id} - {r.Name}");
+            }
+
+            // تست جدول Tickets
+            var tickets = _context.Tickets.ToList();
+            Console.WriteLine($"تعداد Tickets: {tickets.Count}");
+
+            return BadRequest(new { message = "نام کاربری  یا رمز عبور معبر نمی باشد !" });
+
+        } 
+
+
     }
 }

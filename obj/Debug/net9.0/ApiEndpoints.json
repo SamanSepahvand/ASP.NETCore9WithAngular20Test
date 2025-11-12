@@ -45,7 +45,7 @@
     "Parameters": [
       {
         "Name": "user",
-        "Type": "CoreAngular1.Models.Users",
+        "Type": "CoreAngular1.Models.CachedUsers",
         "IsRequired": true
       }
     ],

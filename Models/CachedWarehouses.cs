@@ -4,8 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace YourApp.Models
 {
-    [Table("Warehouses")]
-    public class Warehouses
+    [Table("CachedWarehouses")]
+    public class CachedWarehouses
     {
         [Key]
         public int Id { get; set; }

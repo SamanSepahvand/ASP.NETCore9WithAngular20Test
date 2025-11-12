@@ -4,8 +4,8 @@
 
     namespace YourApp.Models
     {
-        [Table("UserDependencies")]
-        public class UserDependencies
+        [Table("CachedUserDependencies")]
+        public class CachedUserDependencies
     {
             [Key] // اگر UserId کلید اصلیه
             public int UserId { get; set; }

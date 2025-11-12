@@ -1,4 +1,5 @@
 ﻿using CoreAngular1.Data;
+using CoreAngular1.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -48,16 +49,25 @@ builder.Services.AddSpaStaticFiles(configuration =>
 var app = builder.Build();
 
 // ---------- Middleware ----------
-if (app.Environment.IsDevelopment())
+// ---------- Global Exception Logger ----------
+app.UseExceptionHandler(errorApp =>
 {
-    app.UseDeveloperExceptionPage();
-}
-else
-{
-    app.UseExceptionHandler("/Error");
-    app.UseHsts();
-}
+    errorApp.Run(async context =>
+    {
+        var feature = context.Features.Get<Microsoft.AspNetCore.Diagnostics.IExceptionHandlerFeature>();
+        if (feature?.Error != null)
+        {
+            using var scope = app.Services.CreateScope();
+            var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+            var logger = new CoreAngular1.Services.ErrorLogger(db);
+            logger.Log(feature.Error);
+        }
 
+        context.Response.StatusCode = 500;
+        await context.Response.WriteAsJsonAsync(new { error = "خطای داخلی در سرور رخ داده است." });
+    });
+});
+// ---------- Global Exception Logger ----------
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseSpaStaticFiles();
@@ -86,5 +96,7 @@ app.UseSpa(spa =>
         //spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
     }
 });
+
+
 
 app.Run();
