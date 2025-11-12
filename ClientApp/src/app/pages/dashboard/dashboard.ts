@@ -6,6 +6,7 @@ import { AuthService } from '../../services/auth.service';
 import { CommonModule, DatePipe } from '@angular/common'; // اضافه کردن DatePipe
 import { Chart, registerables } from 'chart.js';
 
+
 @Component({
   selector: 'app-dashboard',
   imports: [CommonModule, DatePipe],
@@ -13,6 +14,8 @@ import { Chart, registerables } from 'chart.js';
   styleUrl: './dashboard.css',
 })
 export class DashboardComponent implements OnDestroy   {
+
+
 private intervalId: any;
 user: any;
 
@@ -76,6 +79,7 @@ renderChart() {
   }
 
 
+ 
 
 
   /*یه تایم لاینه برای نشون دادن توکن چقدر اعتبار داره*/

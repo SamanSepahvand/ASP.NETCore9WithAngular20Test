@@ -6,6 +6,8 @@ import { AuthGuard } from './guards/auth.guard';
 import { MainLayoutComponent } from './layout/main-layout/main-layout';
 import { TestPageComponent } from './pages/test-page/test-page';
 
+
+
 export const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
@@ -16,6 +18,7 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       { path: 'dashboard', component: DashboardComponent },
+
       // سایر صفحات بعدی هم اینجا اضافه می‌کنی
       { path: 'test', component: TestPageComponent }, // حالا هدر و فوتر مشترک
       // { path: 'reports', component: ReportsComponent },

@@ -71,7 +71,7 @@ namespace CoreAngular1.Controllers
             var user = _context.CachedUsers.FirstOrDefault(u => u.UserName == login.UserName);
             if (user == null)
             {
-                var ss = user.Id + 58;
+      
                 return BadRequest(new { message = "نام کاربری  یا رمز عبور معبر نمی باشد !" });
 
             }

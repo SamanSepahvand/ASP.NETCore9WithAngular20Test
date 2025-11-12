@@ -1,0 +1,47 @@
+<!-- Modal -->
+<div class="modal fade" id="insertTicketModal" tabindex="-1" aria-labelledby="insertTicketLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg"> <!-- بدون modal-dialog-centered -->
+    <div class="modal-content">
+      <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h5 class="modal-title" id="insertTicketLabel">ثبت تیکت جدید</h5>
+      
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="onSubmit()" #ticketForm="ngForm">
+          <div class="mb-3">
+            <input type="text" class="form-control" placeholder="عنوان تیکت" name="title" [(ngModel)]="ticket.title" required>
+          </div>
+
+          <div class="mb-3">
+            <textarea class="form-control" placeholder="توضیحات" name="description" [(ngModel)]="ticket.description"></textarea>
+          </div>
+
+          <div class="mb-3">
+            <select class="form-select" name="fromDepartmentId" [(ngModel)]="ticket.fromDepartmentId">
+              <option [ngValue]="null" disabled>واحد مبدا</option>
+              <option *ngFor="let d of departments" [value]="d.id">{{ d.name }}</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <select class="form-select" name="toDepartmentId" [(ngModel)]="ticket.toDepartmentId">
+              <option [ngValue]="null" disabled>واحد مقصد</option>
+              <option *ngFor="let d of departments" [value]="d.id">{{ d.name }}</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <select class="form-select" name="priority" [(ngModel)]="ticket.priority">
+              <option value="Normal">معمولی</option>
+              <option value="High">بالا</option>
+              <option value="Low">پایین</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-primary w-100">ثبت تیکت</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -8,6 +8,12 @@
 
     <!-- منوی کشویی -->
 <ul class="dropdown-menu" [class.show]="dropdownOpen">
+
+     <li>
+    <a routerLink="/profile" (click)="openTicketModal()">
+      <i class="fas fa-plus"></i> ثبت تیکت جدید
+    </a>
+  </li>
   <li>
     <a routerLink="/profile">
       <i class="fas fa-user"></i> پروفایل
@@ -20,7 +26,7 @@
 
   </li>
 
-  
+
   <li>
     <a routerLink="/settings">
       <i class="fas fa-cog"></i> تنظیمات
@@ -45,4 +51,6 @@
 
    
   </div>
+
+
 </header>

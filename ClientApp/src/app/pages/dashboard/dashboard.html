@@ -26,6 +26,8 @@
     <canvas id="ticketsChart"></canvas>
   </div>
 
+
+
   <!-- جدول آخرین تیکت‌ها -->
   <div class="table-container">
     <h3>آخرین تیکت‌ها</h3>
@@ -39,6 +41,10 @@
     </tr>
   </thead>
   <tbody>
+
+    <!-- ticket-list.html -->
+
+
     <tr *ngFor="let ticket of tickets">
       <td>{{ ticket.id }}</td>
       <td>{{ ticket.user }}</td>
@@ -52,5 +58,7 @@
     </tr>
   </tbody>
 </table>
+
+
   </div>
 </div>
